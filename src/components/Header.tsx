@@ -1,16 +1,35 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  HeaderSt,
+  HeaderNav,
+  HeaderTitle,
+  HeaderP,
+} from "../style/HeaderStyle";
 
 const Header = () => {
+  let Navigate = useNavigate();
   return (
-    <header>
-      <h2>Todo List</h2>
+    <HeaderSt>
+      <HeaderTitle
+        onClick={() => {
+          Navigate("/");
+        }}
+      >
+        Todo List
+      </HeaderTitle>
 
-      <nav>
-        <p>SignIn</p>
-        <p>SignUp</p>
-        <p>Logout</p>
-      </nav>
-    </header>
+      <HeaderNav>
+        <HeaderP
+          onClick={() => {
+            Navigate("/auth");
+          }}
+        >
+          SignIn
+        </HeaderP>
+        <HeaderP>Logout</HeaderP>
+      </HeaderNav>
+    </HeaderSt>
   );
 };
 
