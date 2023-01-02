@@ -13,15 +13,13 @@ export const HeaderNav = styled.span`
 `;
 
 export const HeaderTitle = styled.p`
-  font-size: 1.2rem;
-  font-width: 20px;
+  font-size: 1.4rem;
   margin: auto 0;
   margin-left: 4rem;
 `;
 
 export const HeaderP = styled.p`
   font-size: 1rem;
-  font-width: 20px;
   margin: auto 0;
   margin-right: 2rem;
 `;
