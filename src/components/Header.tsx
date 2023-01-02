@@ -6,6 +6,7 @@ import {
   HeaderTitle,
   HeaderP,
 } from "../style/HeaderStyle";
+import { isLogIn } from "../store/isLogInAtom";
 
 const Header = () => {
   let Navigate = useNavigate();
@@ -18,16 +19,26 @@ const Header = () => {
       >
         Todo List
       </HeaderTitle>
-
+      <button
+        onClick={() => {
+          let a = Object.keys(localStorage);
+          console.log(a);
+        }}
+      >
+        Token??
+      </button>
       <HeaderNav>
-        <HeaderP
-          onClick={() => {
-            Navigate("/auth");
-          }}
-        >
-          SignIn
-        </HeaderP>
-        <HeaderP>Logout</HeaderP>
+        {isLogIn ? (
+          <HeaderP
+            onClick={() => {
+              Navigate("/auth");
+            }}
+          >
+            SignIn
+          </HeaderP>
+        ) : (
+          <HeaderP>Logout</HeaderP>
+        )}
       </HeaderNav>
     </HeaderSt>
   );

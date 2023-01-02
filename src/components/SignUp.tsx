@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { loginToken, isLogIn } from "../store/isLogInAtom";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
 
 const Url: string = "http://localhost:8080";
 
@@ -30,7 +33,8 @@ const PostAxios = async ({
       password: password,
     })
     .then((e) => {
-      console.log(e.data.token);
+      let a: string = e.data.token;
+      console.log(a);
     })
     .catch((e) => {
       console.log(e);
@@ -38,6 +42,8 @@ const PostAxios = async ({
 };
 
 const SignUp = () => {
+  let [reloginToken, setLoginToken] = useRecoilState(loginToken);
+  let Navigate = useNavigate();
   let ChEmail: RegExp = /^[a-zA-Z0-9]+@+[a-zA-Z0-9.]+\.[a-zA-Z]{2,6}$/; // 아무 문자@아무문자.아무문자(2~6개까지)
   let ChPassword: RegExp = /^.{8,}$/; //8글자 이상
   let [isEmail, setIsEmail] = useState<boolean>(false);
@@ -112,10 +118,17 @@ const SignUp = () => {
       <button
         onClick={() => {
           if (isSamePassword && isEmail && isPassword) {
-            alert("회원가입 되었습니다!");
             PostAxios({ email, password });
-          } else {
-            alert("정보를 제대로 입력해주세요");
+            //   if ( != "") {
+            //     alert("회원가입 되었습니다!");
+            //     // setLoginToken();
+            //     console.log("ddd", reloginToken, "dddd");
+            //     Navigate("/");
+            //   } else {
+            //     alert("계정이 있습니다.");
+            //   }
+            // } else {
+            //   alert("정보를 제대로 입력해주세요");
           }
         }}
       >

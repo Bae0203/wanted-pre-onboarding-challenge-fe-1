@@ -13,3 +13,5 @@ const isLogIn = atom<boolean>({
   key: "isLogIn",
   default: false,
 });
+
+export { loginToken, isLogIn };

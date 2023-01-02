@@ -4,13 +4,16 @@ import App from "./pages/App";
 import reportWebVitals from "./reportWebVitals";
 import Router from "./Router";
 import "./style/index.css";
+import { RecoilRoot } from "recoil";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Router />
+    <RecoilRoot>
+      <Router />
+    </RecoilRoot>
   </React.StrictMode>
 );
 
