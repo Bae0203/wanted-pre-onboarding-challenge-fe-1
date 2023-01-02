@@ -2,11 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-interface userDataInterface {
-  email: string;
-  password: string;
-}
-
 const Url: string = "http://localhost:8080";
 
 const UserInfoCheckBox = styled.div`
@@ -21,6 +16,26 @@ const UserInfoCheckBox = styled.div`
 const Label = styled.div`
   display: flex;
 `;
+
+const PostAxios = async ({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) => {
+  await axios
+    .post(Url + "/users/create", {
+      email: email,
+      password: password,
+    })
+    .then((e) => {
+      console.log(e.data.token);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
 
 const SignUp = () => {
   let ChEmail: RegExp = /^[a-zA-Z0-9]+@+[a-zA-Z0-9.]+\.[a-zA-Z]{2,6}$/; // 아무 문자@아무문자.아무문자(2~6개까지)
@@ -97,23 +112,8 @@ const SignUp = () => {
       <button
         onClick={() => {
           if (isSamePassword && isEmail && isPassword) {
-            const userData: userDataInterface = {
-              email: email,
-              password: password,
-            };
-            console.log(userData);
             alert("회원가입 되었습니다!");
-            axios
-              .post(Url + "/users/create", {
-                email: email,
-                password: password,
-              })
-              .then((e) => {
-                console.log(e.data.token);
-              })
-              .catch((e) => {
-                console.log(e);
-              });
+            PostAxios({ email, password });
           } else {
             alert("정보를 제대로 입력해주세요");
           }
