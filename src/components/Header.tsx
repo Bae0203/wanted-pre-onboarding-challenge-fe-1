@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
   HeaderSt,
@@ -7,9 +6,26 @@ import {
   HeaderP,
 } from "../style/HeaderStyle";
 import { isLogIn } from "../store/isLogInAtom";
+import { useRecoilState } from "recoil";
+import { useEffect } from "react";
 
 const Header = () => {
   let Navigate = useNavigate();
+  let [reIsLogIn, setIsLogIn] = useRecoilState<boolean>(isLogIn);
+  useEffect(() => {
+    if (localStorage.getItem("loginToken")) {
+      setIsLogIn(true);
+      console.log("dd:" + reIsLogIn);
+    }
+  }, []);
+  // let setIsLogIn = useSetRecoilState(isLogIn);
+  // if (Token == null) {
+  //   setIsLogIn(false);
+  //   console.log("ff", isLogIn);
+  // } else {
+  //   setIsLogIn(true);
+  //   console.log("tt", isLogIn);
+  // }
   return (
     <HeaderSt>
       <HeaderTitle
@@ -21,14 +37,27 @@ const Header = () => {
       </HeaderTitle>
       <button
         onClick={() => {
-          let a = Object.keys(localStorage);
+          let a = Object.values(localStorage);
           console.log(a);
         }}
       >
-        Token??
+        dd
       </button>
       <HeaderNav>
-        {isLogIn ? (
+        {reIsLogIn ? (
+          <HeaderP
+            onClick={() => {
+              let a: boolean = window.confirm("로그아웃 하시겠습니까?");
+              if (a) {
+                localStorage.clear();
+                console.log(isLogIn);
+                setIsLogIn(false);
+              }
+            }}
+          >
+            Logout
+          </HeaderP>
+        ) : (
           <HeaderP
             onClick={() => {
               Navigate("/auth");
@@ -36,8 +65,6 @@ const Header = () => {
           >
             SignIn
           </HeaderP>
-        ) : (
-          <HeaderP>Logout</HeaderP>
         )}
       </HeaderNav>
     </HeaderSt>

@@ -20,6 +20,8 @@ const Label = styled.div`
   display: flex;
 `;
 
+let add: string = "";
+
 const PostAxios = async ({
   email,
   password,
@@ -34,7 +36,9 @@ const PostAxios = async ({
     })
     .then((e) => {
       let a: string = e.data.token;
-      console.log(a);
+      add = e.data.token;
+      console.log("axios : ", a);
+      localStorage.setItem("loginToken", a);
     })
     .catch((e) => {
       console.log(e);
@@ -119,16 +123,20 @@ const SignUp = () => {
         onClick={() => {
           if (isSamePassword && isEmail && isPassword) {
             PostAxios({ email, password });
-            //   if ( != "") {
-            //     alert("회원가입 되었습니다!");
-            //     // setLoginToken();
-            //     console.log("ddd", reloginToken, "dddd");
-            //     Navigate("/");
-            //   } else {
-            //     alert("계정이 있습니다.");
-            //   }
-            // } else {
-            //   alert("정보를 제대로 입력해주세요");
+            // let a: string | null = localStorage.getItem("loginToken");
+            console.log("a : ", add);
+            setTimeout(() => {
+              if (add != "") {
+                alert("회원가입 되었습니다!");
+                setLoginToken(add);
+                console.log("ddd", reloginToken, "dddd");
+                Navigate("/");
+              } else {
+                alert("계정이 있습니다.");
+              }
+            }, 100);
+          } else {
+            alert("정보를 제대로 입력해주세요");
           }
         }}
       >
