@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { isLogIn } from "../store/isLogInAtom";
 import {
   TodoNavBox,
@@ -12,30 +12,16 @@ import {
 import TodoContent from "./TodoContent";
 import customAxios from "../hooks/customAxios";
 
-// const Url: string = "http://localhost:8080";
-
-// const PostTodo = async ({
-//   content,
-//   title,
-// }: {
-//   content: string;
-//   title: string;
-// }) => {
-//   await axios
-//     .post(Url + "/todos", {
-//       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-//       title: title,
-//       content: content,
-//     })
-//     .then((e) => {
-//       console.log(e);
-//     })
-//     .catch((e) => {
-//       console.log(e);
-//     });
-// };
-
 const TodoBox = () => {
+  let [todoContent, setTodoContent] = useState<any[]>([]);
+
+  useEffect(() => {
+    customAxios.get("/todos").then((e) => {
+      let a: any[] = [...e.data.data];
+      setTodoContent([...a]);
+    });
+  }, [todoContent]);
+
   let isLogged = useRecoilValue(isLogIn);
   let [content, setContent] = useState<string>("");
   let [title, setTitle] = useState<string>("");
@@ -68,10 +54,22 @@ const TodoBox = () => {
                   title + "\n" + content + "를 할 일에 추가하시겠습니까??"
                 );
                 console.log(addCh, localStorage.getItem("loginToken"));
-                customAxios.post("/todos", {
-                  title: title,
-                  content: content,
-                });
+                customAxios
+                  .post("/todos", {
+                    title: title,
+                    content: content,
+                  })
+                  .then((e) => {
+                    console.log("tt", e);
+                    let a: any[] = [...todoContent];
+                    a.push(e);
+                    setTodoContent([...a]);
+                  })
+                  .catch((e) => {
+                    console.log(e);
+                  });
+                setTitle("");
+                setContent("");
               }
             }}
           >
@@ -79,9 +77,15 @@ const TodoBox = () => {
           </button>
           <h3>Todo List</h3>
           <TodoUl>
-            <TodoContent></TodoContent>
-            <TodoContent></TodoContent>
-            <TodoContent></TodoContent>
+            {todoContent.map((e) => {
+              return (
+                <TodoContent
+                  title={e.title}
+                  content={e.content}
+                  id={e.id}
+                ></TodoContent>
+              );
+            })}
           </TodoUl>
         </TodoContentBox>
       ) : (

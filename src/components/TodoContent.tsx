@@ -1,26 +1,45 @@
 import axios from "axios";
 import React from "react";
+import customAxios from "../hooks/customAxios";
 import { TodoLi, TodoContentSpan } from "../style/TodoContentStyle";
 
-const TodoContent = () => {
+const TodoContent = ({
+  title,
+  content,
+  id,
+}: {
+  title: string;
+  content: string;
+  id: string;
+}) => {
   return (
     <TodoLi>
       <TodoContentSpan
         onClick={() => {
-          console.log("응 아잇어");
-
-          //   axios
-          //     .get( + "/todos")
-          //     .then((e) => {
-          //       console.log("성공 : ", e);
-          //     })
-          //     .catch((e) => {
-          //       console.log(e);
-          //     });
+          console.log(content);
         }}
       >
-        Title
+        {title}
       </TodoContentSpan>
+      <button
+        onClick={() => {
+          let delCh: boolean = window.confirm(
+            title + "\n" + content + "를 삭제 하시겠습니까?"
+          );
+          if (delCh) {
+            customAxios
+              .delete("/todos/" + id)
+              .then((e) => {
+                console.log(e);
+              })
+              .catch((e) => {
+                console.log(e);
+              });
+          }
+        }}
+      >
+        삭제
+      </button>
     </TodoLi>
   );
 };

@@ -5,7 +5,8 @@ export const TodoLi = styled.li`
 `;
 
 export const TodoContentSpan = styled.p`
-  width: 80%;
+  width: 90%;
   margin-right: 1.2rem;
   display: inline-block;
+  word-wrap: break-word;
 `;
