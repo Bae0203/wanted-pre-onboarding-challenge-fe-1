@@ -35,14 +35,14 @@ const Header = () => {
       >
         Todo List
       </HeaderTitle>
-      <button
+      {/* <button
         onClick={() => {
           let a = Object.values(localStorage);
           console.log(a);
         }}
       >
         dd
-      </button>
+      </button> */}
       <HeaderNav>
         {reIsLogIn ? (
           <HeaderP

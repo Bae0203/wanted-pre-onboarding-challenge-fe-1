@@ -1,7 +1,7 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { isLogIn, loginToken } from "../store/isLogInAtom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 
 const Url: string = "http://localhost:8080";
@@ -33,7 +33,7 @@ const PostAxios = async ({
 const SignIn = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  let [reloginToken, setLoginToken] = useRecoilState(loginToken);
+  let setLoginToken = useSetRecoilState(loginToken);
   let setIsLogIn = useSetRecoilState(isLogIn);
   let Navigate = useNavigate();
   return (
