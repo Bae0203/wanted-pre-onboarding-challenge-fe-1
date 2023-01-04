@@ -1,7 +1,13 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import customAxios from "../hooks/customAxios";
-import { TodoLi, TodoContentSpan } from "../style/TodoContentStyle";
+import {
+  TodoLi,
+  TodoContentSpan,
+  ContentDivBox,
+  TodoTitleInputBox,
+  TodoContentInputBox,
+} from "../style/TodoContentStyle";
 
 const TodoContent = ({
   title,
@@ -12,11 +18,14 @@ const TodoContent = ({
   content: string;
   id: string;
 }) => {
+  let [showContent, setShowContent] = useState<boolean>(false);
+  let [changeTitle, setChangeTitle] = useState<string>("");
+  let [changeContent, setChangeContent] = useState<string>("");
   return (
     <TodoLi>
       <TodoContentSpan
         onClick={() => {
-          console.log(content);
+          setShowContent(!showContent);
         }}
       >
         {title}
@@ -40,6 +49,32 @@ const TodoContent = ({
       >
         삭제
       </button>
+      {showContent ? (
+        <>
+          <ContentDivBox>
+            {content}
+            <div>
+              <TodoTitleInputBox
+                type="text"
+                placeholder="제목 변경"
+                value={changeTitle}
+                onChange={(e) => {
+                  setChangeTitle(e.target.value);
+                }}
+              />
+              <TodoContentInputBox
+                type="text"
+                placeholder="내용 변경"
+                value={changeContent}
+                onChange={(e) => {
+                  setChangeContent(e.target.value);
+                }}
+              />
+              <button>수정</button>
+            </div>
+          </ContentDivBox>
+        </>
+      ) : null}
     </TodoLi>
   );
 };

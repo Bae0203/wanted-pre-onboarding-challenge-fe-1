@@ -10,3 +10,21 @@ export const TodoContentSpan = styled.p`
   display: inline-block;
   word-wrap: break-word;
 `;
+
+export const ContentDivBox = styled.div`
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 96%;
+  padding: 2%;
+  margin: 5px 0px 10px 0px;
+`;
+
+export const TodoContentInputBox = styled.input`
+  width: 50%;
+  padding: 5px;
+  margin-right: 10px;
+`;
+export const TodoTitleInputBox = styled.input`
+  margin: 10px auto 0px auto;
+  margin-right: 10px;
+  padding: 5px;
+`;
