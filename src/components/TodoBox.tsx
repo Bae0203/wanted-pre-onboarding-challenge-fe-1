@@ -1,7 +1,6 @@
-import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRecoilValue } from "recoil";
-import { isLogIn, loginToken } from "../store/isLogInAtom";
+import { isLogIn } from "../store/isLogInAtom";
 import {
   TodoNavBox,
   TodoContentInputBox,
@@ -11,29 +10,30 @@ import {
   TodoTitleInputBox,
 } from "../style/TodoStyle";
 import TodoContent from "./TodoContent";
+import customAxios from "../hooks/customAxios";
 
-const Url: string = "http://localhost:8080";
+// const Url: string = "http://localhost:8080";
 
-const PostTodo = async ({
-  content,
-  title,
-}: {
-  content: string;
-  title: string;
-}) => {
-  await axios
-    .post(Url + "/todos", {
-      title: title,
-      content: content,
-      headers: { Authorization: localStorage.getItem("loginToken") },
-    })
-    .then((e) => {
-      console.log(e);
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-};
+// const PostTodo = async ({
+//   content,
+//   title,
+// }: {
+//   content: string;
+//   title: string;
+// }) => {
+//   await axios
+//     .post(Url + "/todos", {
+//       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+//       title: title,
+//       content: content,
+//     })
+//     .then((e) => {
+//       console.log(e);
+//     })
+//     .catch((e) => {
+//       console.log(e);
+//     });
+// };
 
 const TodoBox = () => {
   let isLogged = useRecoilValue(isLogIn);
@@ -68,7 +68,10 @@ const TodoBox = () => {
                   title + "\n" + content + "를 할 일에 추가하시겠습니까??"
                 );
                 console.log(addCh, localStorage.getItem("loginToken"));
-                PostTodo({ content, title });
+                customAxios.post("/todos", {
+                  title: title,
+                  content: content,
+                });
               }
             }}
           >
