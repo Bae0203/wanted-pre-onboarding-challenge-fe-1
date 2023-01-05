@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const TodoNavBox = styled.nav`
-  margin: 2rem auto;
+  margin: 3rem auto;
   width: 50%;
   height: 700px;
   border-radius: 5%;
