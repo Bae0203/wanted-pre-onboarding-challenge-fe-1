@@ -28,9 +28,21 @@ export const TodoContentBox = styled.div`
 export const PleaseLoggin = styled.div`
   width: 80%;
   margin: auto;
-  padding-top: 40%;
-  font-size: 1.8rem;
+  padding-top: 30%;
+  font-size: 2.3rem;
+  font-weight: bold;
   text-align: center;
+`;
+
+export const GoLoggin = styled.div`
+  width: 80%;
+  margin: auto;
+  margin-top: 3%;
+  font-size: 1.5rem;
+  text-align: center;
+  &:hover {
+    color: gray;
+  }
 `;
 
 export const TodoUl = styled.ul`

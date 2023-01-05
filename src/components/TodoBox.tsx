@@ -8,11 +8,14 @@ import {
   PleaseLoggin,
   TodoUl,
   TodoTitleInputBox,
+  GoLoggin,
 } from "../style/TodoStyle";
 import TodoContent from "./TodoContent";
 import customAxios from "../hooks/customAxios";
+import { useNavigate } from "react-router-dom";
 
 const TodoBox = () => {
+  let Navigate = useNavigate();
   let [todoContent, setTodoContent] = useState<any[]>([]);
 
   useEffect(() => {
@@ -87,7 +90,16 @@ const TodoBox = () => {
           </TodoUl>
         </TodoContentBox>
       ) : (
-        <PleaseLoggin>로그인 해주세요</PleaseLoggin>
+        <>
+          <PleaseLoggin>로그인 해주세요</PleaseLoggin>
+          <GoLoggin
+            onClick={() => {
+              Navigate("/auth");
+            }}
+          >
+            로그인하러 가기
+          </GoLoggin>
+        </>
       )}
     </TodoNavBox>
   );
