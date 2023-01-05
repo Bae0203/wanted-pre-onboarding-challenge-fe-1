@@ -36,14 +36,13 @@ const TodoContent = ({
             title + "\n" + content + "를 삭제 하시겠습니까?"
           );
           if (delCh) {
+            setShowContent(false);
             customAxios
               .delete("/todos/" + id)
               .then((e) => {
-                console.log(e);
+                alert("삭제되었습니다.");
               })
-              .catch((e) => {
-                console.log(e);
-              });
+              .catch((e) => {});
           }
         }}
       >
@@ -70,7 +69,28 @@ const TodoContent = ({
                   setChangeContent(e.target.value);
                 }}
               />
-              <button>수정</button>
+              <button
+                onClick={() => {
+                  let ChangeCh: boolean = window.confirm(
+                    changeTitle + "\n" + changeContent + "로 수정 하시겠습니까?"
+                  );
+                  if (ChangeCh) {
+                    customAxios
+                      .put("/todos/" + id, {
+                        title: changeTitle,
+                        content: changeContent,
+                      })
+                      .then((e) => {
+                        alert("수정되었습니다!");
+                      })
+                      .catch((e) => {});
+                    setChangeContent("");
+                    setChangeTitle("");
+                  }
+                }}
+              >
+                수정
+              </button>
             </div>
           </ContentDivBox>
         </>
