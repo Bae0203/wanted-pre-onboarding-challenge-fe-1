@@ -37,12 +37,9 @@ const PostAxios = async ({
     .then((e) => {
       let a: string = e.data.token;
       add = e.data.token;
-      console.log("axios : ", a);
       localStorage.setItem("loginToken", a);
     })
-    .catch((e) => {
-      console.log(e);
-    });
+    .catch((e) => {});
 };
 
 const SignUp = () => {
@@ -124,12 +121,10 @@ const SignUp = () => {
           if (isSamePassword && isEmail && isPassword) {
             PostAxios({ email, password });
             // let a: string | null = localStorage.getItem("loginToken");
-            console.log("a : ", add);
             setTimeout(() => {
               if (add != "") {
                 alert("회원가입 되었습니다!");
                 setLoginToken(add);
-                console.log("ddd", reloginToken, "dddd");
                 Navigate("/");
               } else {
                 alert("계정이 있습니다.");

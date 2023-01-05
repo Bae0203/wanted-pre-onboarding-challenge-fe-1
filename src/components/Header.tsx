@@ -15,7 +15,6 @@ const Header = () => {
   useEffect(() => {
     if (localStorage.getItem("loginToken")) {
       setIsLogIn(true);
-      console.log("dd:" + reIsLogIn);
     }
   }, []);
   // let setIsLogIn = useSetRecoilState(isLogIn);
@@ -50,7 +49,6 @@ const Header = () => {
               let a: boolean = window.confirm("로그아웃 하시겠습니까?");
               if (a) {
                 localStorage.clear();
-                console.log(isLogIn);
                 setIsLogIn(false);
               }
             }}

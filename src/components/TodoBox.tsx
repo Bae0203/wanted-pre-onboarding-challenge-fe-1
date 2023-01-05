@@ -53,23 +53,21 @@ const TodoBox = () => {
                 let addCh: boolean = window.confirm(
                   title + "\n" + content + "를 할 일에 추가하시겠습니까??"
                 );
-                console.log(addCh, localStorage.getItem("loginToken"));
-                customAxios
-                  .post("/todos", {
-                    title: title,
-                    content: content,
-                  })
-                  .then((e) => {
-                    console.log("tt", e);
-                    let a: any[] = [...todoContent];
-                    a.push(e);
-                    setTodoContent([...a]);
-                  })
-                  .catch((e) => {
-                    console.log(e);
-                  });
-                setTitle("");
-                setContent("");
+                if (addCh) {
+                  customAxios
+                    .post("/todos", {
+                      title: title,
+                      content: content,
+                    })
+                    .then((e) => {
+                      let a: any[] = [...todoContent];
+                      a.push(e);
+                      setTodoContent([...a]);
+                    })
+                    .catch((e) => {});
+                  setTitle("");
+                  setContent("");
+                }
               }
             }}
           >

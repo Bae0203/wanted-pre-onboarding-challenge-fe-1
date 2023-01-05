@@ -23,12 +23,9 @@ const PostAxios = async ({
     .then((e) => {
       let a: string = e.data.token;
       add = e.data.token;
-      console.log("axios : ", a);
       localStorage.setItem("loginToken", a);
     })
-    .catch((e) => {
-      console.log(e);
-    });
+    .catch((e) => {});
 };
 const SignIn = () => {
   const [email, setEmail] = useState<string>("");
