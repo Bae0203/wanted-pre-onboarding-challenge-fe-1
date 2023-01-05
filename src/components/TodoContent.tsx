@@ -75,17 +75,45 @@ const TodoContent = ({
                     changeTitle + "\n" + changeContent + "로 수정 하시겠습니까?"
                   );
                   if (ChangeCh) {
-                    customAxios
-                      .put("/todos/" + id, {
-                        title: changeTitle,
-                        content: changeContent,
-                      })
-                      .then((e) => {
-                        alert("수정되었습니다!");
-                      })
-                      .catch((e) => {});
-                    setChangeContent("");
-                    setChangeTitle("");
+                    if (changeContent != "" && changeTitle != "") {
+                      customAxios
+                        .put("/todos/" + id, {
+                          title: changeTitle,
+                          content: changeContent,
+                        })
+                        .then((e) => {
+                          alert("수정되었습니다!");
+                        })
+                        .catch((e) => {});
+                      setChangeContent("");
+                      setChangeTitle("");
+                    } else if (changeContent != "" && changeTitle == "") {
+                      customAxios
+                        .put("/todos/" + id, {
+                          title: title,
+                          content: changeContent,
+                        })
+                        .then((e) => {
+                          alert("수정되었습니다!");
+                        })
+                        .catch((e) => {});
+                      setChangeContent("");
+                      setChangeTitle("");
+                    } else if (changeContent == "" && changeTitle != "") {
+                      customAxios
+                        .put("/todos/" + id, {
+                          title: changeTitle,
+                          content: content,
+                        })
+                        .then((e) => {
+                          alert("수정되었습니다!");
+                        })
+                        .catch((e) => {});
+                      setChangeContent("");
+                      setChangeTitle("");
+                    } else {
+                      alert("정보를 제대로 입력해주세요");
+                    }
                   }
                 }}
               >
