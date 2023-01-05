@@ -1,1 +1,8 @@
-# wanted-pre-onboarding-challenge-fe-1
+# 원티드 프리온보딩 프론트엔드 챌린지 사전 미션
+Todo List만들기
+
+기능 :
+ - 로그인, 회원가입
+ - Todo 작성 기능(제목, 내용)
+ - Todo 수정 기능(제목, 내용)
+ - Todo 삭제 기능
