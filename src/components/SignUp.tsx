@@ -76,7 +76,7 @@ const SignUp = () => {
 
   return (
     <>
-      <p>이메일</p>
+      <p>이메일 (이메일 형식으로 입력해주세요)</p>
       <Label>
         <input
           type={"text"}
@@ -88,7 +88,7 @@ const SignUp = () => {
         />
         <UserInfoCheckBox check={isEmail} />
       </Label>
-      <p>비밀번호</p>
+      <p>비밀번호 (8자리 이상으로 입력해주세요)</p>
       <Label>
         <input
           type={"password"}
