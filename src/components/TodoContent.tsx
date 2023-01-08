@@ -72,7 +72,14 @@ const TodoContent = ({
               <button
                 onClick={() => {
                   let ChangeCh: boolean = window.confirm(
-                    changeTitle + "\n" + changeContent + "로 수정 하시겠습니까?"
+                    "제목 : " +
+                      (changeTitle == "" ? "(내용 변경 없음)" : changeTitle) +
+                      "\n" +
+                      "내용 : " +
+                      (changeContent == ""
+                        ? "(내용 변경 없음)"
+                        : changeContent) +
+                      "로 수정 하시겠습니까?"
                   );
                   if (ChangeCh) {
                     if (changeContent != "" && changeTitle != "") {
